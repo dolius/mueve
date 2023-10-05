@@ -1,0 +1,55 @@
+body {
+background: black;
+margin: 0px;
+color: white;
+overflow: hidden; /* Hide scroll bars */
+font-family: 'Changa One', sans-serif;
+font-weight:300;
+}
+
+section {
+display: none;
+}
+h1 {
+font-size: 5vw;
+z-index: 9;
+}
+h2 {
+font-size: 3vw;
+}
+
+img {
+width: 100vw;
+height: 100vh;
+}
+
+article {
+padding: 0px 10vw 0px 10vw;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100vh;
+}
+
+/* BACKGROUNDS */
+.bg-green {background: green}
+.bg-blue {background: blue}
+.bg-gray {background: gray}
+
+
+/* IMAGES */
+.bg-image1 {background-image: url('https://i.gifer.com/3ZSH.gif'); }
+.bg-image2 {background-image: url('https://i.gifer.com/fxVE.gif'); }
+.bg-image3 {background-image: url('https://i.gifer.com/Oixq.gif'); }
+
+
+/* UTILITIES */
+.fullscreen {    background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed; 
+background-position: center center;}
+
+.center {        
+display: flex;
+align-items: center;
+justify-content: center;}
