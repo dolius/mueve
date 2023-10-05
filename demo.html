@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sequential Animation with Animate.css</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Changa+One&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+
+<!-- MUEVE.CSS -->
+<style>
+
+
+/* NATIVES */
+body {
+background: black;
+margin: 0px;
+color: white;
+overflow: hidden; /* Hide scroll bars */
+font-family: 'Changa One', sans-serif;
+font-weight:300;
+}
+
+section {
+display: none;
+}
+h1 {
+font-size: 5vw;
+z-index: 9;
+}
+h2 {
+font-size: 3vw;
+}
+
+img {
+width: 100vw;
+height: 100vh;
+}
+
+article {
+padding: 0px 10vw 0px 10vw;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100vh;
+}
+
+/* BACKGROUNDS */
+.bg-green {background: green}
+.bg-blue {background: blue}
+.bg-gray {background: gray}
+
+
+/* IMAGES */
+.bg-image1 {background-image: url('https://i.gifer.com/3ZSH.gif'); }
+.bg-image2 {background-image: url('https://i.gifer.com/fxVE.gif'); }
+.bg-image3 {background-image: url('https://i.gifer.com/Oixq.gif'); }
+
+
+/* UTILITIES */
+.fullscreen {    background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed; 
+background-position: center center;}
+
+.center {        
+display: flex;
+align-items: center;
+justify-content: center;}
+
+
+</style>
+</head>
+<body>
+
+
+
+
+
+<!-- SEQUENCE STARTS HERE -->
+<main>
+
+
+<!-- SECTIONS ARE THE MAIN WRAPERS -->
+<section data-entrance="fadeIn" data-exit="fadeOut" data-stay="1">
+<article>
+<h1 class="center">3</h1>
+</article>
+</section>
+
+<section data-entrance="fadeIn" data-exit="fadeOut" data-stay="1">
+<article>
+<h1 class="center">2</h1>
+</article>
+</section>
+
+<section data-entrance="fadeIn" data-exit="fadeOut" data-stay="1">
+<article>
+<h1 class="center">1</h1>
+</article>
+</section>
+
+
+<section class="bg-image1 fullscreen"  data-entrance="bounce" data-exit="backOutDown" data-stay="5">
+<article><h1>Welcome to</h1></article>
+</section>
+
+<section class="bg-image2 fullscreen" data-entrance="bounceInLeft" data-exit="bounceOut" data-stay="3">
+<article><h1>mueve.js</h1></article>
+</section>
+
+
+<section class="bg-image3 fullscreen" class="bg-green" data-entrance="bounceInLeft" data-exit="bounceOut" data-stay="3">
+<div><article><h1>A designer library</h1></article></div>
+</section>
+
+
+<section class="bg-red" data-entrance="bounceInLeft" data-exit="bounceOut" data-stay="3">
+<div><article><h1>A CSS motion sequencer</h1></article></div>
+</section>
+
+
+<section data-entrance="fadeIn" data-exit="bounceOut" data-stay="3">
+<div><article><h1>Turn HTML into story-video</h1></article></div>
+</section>
+
+
+
+<section  data-entrance="fadeIn" data-exit="bounceOut" data-stay="10">
+<article><h2>mueve.js is a versatile JavaScript micro library designed to simplify the process of creating and orchestrating stunning animations and sequences within your HTML documents.</h2></article>
+</section>
+
+
+<section  data-entrance="bounceInLeft" data-exit="bounceOut" data-stay="10">
+<article><h2>With mueve.js, you can effortlessly compose complex animations using Animate.css classes, HTML elements, and JavaScript to achieve dynamic stories and presentations.</h2></article>
+</section>
+
+
+
+<section class="bg-image1 fullscreen"  data-entrance="bounce" data-exit="backOutDown" data-stay="30">
+<article><h1><a href="documentation.html">Read docs</a></h1></article>
+</section>
+
+
+<section data-order="5" data-entrance="bounce" data-exit="bounceOut" data-stay="5">
+<img src="https://st.depositphotos.com/1518767/3845/i/450/depositphotos_38457581-stock-photo-futuristic-technology-interface.jpg">
+</section>
+<section data-order="6" data-entrance="fadeInRight" data-exit="bounceOut" data-stay="1">
+<img src=" https://cdn.pixabay.com/photo/2018/05/18/15/30/web-design-3411373_1280.jpg">
+</section>
+<section data-order="7" data-entrance="fadeIn" data-exit="fadeOut" data-stay="2">
+<img src="https://st.depositphotos.com/1518767/3845/i/450/depositphotos_38457581-stock-photo-futuristic-technology-interface.jpg">
+</section>
+</main>
+
+
+
+<!-- MUEVE.JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+const sections = document.querySelectorAll("section");
+let currentIndex = 0;
+
+function animateSection(index) {
+if (index >= sections.length) {
+return; // Stop when there are no more sections
+}
+
+const currentSection = sections[index];
+const entranceAnimation = "animate__" + currentSection.getAttribute("data-entrance");
+const exitAnimation = "animate__" + currentSection.getAttribute("data-exit");
+const stayDuration = parseInt(currentSection.getAttribute("data-stay")) * 1000;
+
+// Add entrance animation
+currentSection.style.display = "block";
+currentSection.classList.add("animate__animated", entranceAnimation);
+
+setTimeout(() => {
+// Add exit animation after stay duration
+currentSection.classList.remove(entranceAnimation);
+currentSection.classList.add(exitAnimation);
+
+setTimeout(() => {
+// Hide the section after exit animation
+currentSection.style.display = "none";
+currentSection.classList.remove(exitAnimation);
+
+// Move to the next section
+animateSection(index + 1);
+}, 1000); // Adjust this timeout as needed to match your exit animation duration
+}, stayDuration);
+}
+
+// Start the animation sequence
+animateSection(currentIndex);
+});
+</script>
+
+
+
+</body>
+</html>
